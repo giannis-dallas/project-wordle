@@ -1,6 +1,6 @@
 import { useState, React } from "react";
 
-function GuessInputWrapper({ guesses, setGuesses}) {
+function GuessInputWrapper({ guesses, setGuesses }) {
   const [guess, setGuess] = useState("");
   const [input, setInput] = useState("");
 
@@ -8,12 +8,12 @@ function GuessInputWrapper({ guesses, setGuesses}) {
     event.preventDefault();
 
     let newGuess = input;
-    console.log(newGuess);
-    console.log(guesses);
     setInput("");
 
-    // const newGuessess = [...guesses];
-    // setGuesses(newGuessess.push(newGuess));
+    if (guesses.length < 5) {
+      const newGuessess = [...guesses, newGuess];
+      setGuesses(newGuessess);
+    }
   }
 
   return (
@@ -24,10 +24,11 @@ function GuessInputWrapper({ guesses, setGuesses}) {
           id="guess-input"
           type="text"
           value={input}
-          onChange={(event) => setInput(event.target.value.toUpperCase() )}
+          onChange={(event) => setInput(event.target.value.toUpperCase())}
           minLength={5}
           maxLength={5}
           pattern="^[a-zA-Z]{5}$"
+          title="5 letter words only"
         />
       </form>
     </>

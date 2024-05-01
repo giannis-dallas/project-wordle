@@ -5,10 +5,9 @@ function GuessResults({ guesses }) {
   return (
     <>
       <div className="guess-results">
-        <p className="guess">FIRST</p>
-        {/* {guesses.map((guess) => (
+        {guesses.map((guess) => (
           <p className="guess">{guess}</p>
-        ))} */}
+        ))}
       </div>
     </>
   );
