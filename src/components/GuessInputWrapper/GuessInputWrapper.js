@@ -1,7 +1,7 @@
 import { useState, React } from "react";
+import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 
 function GuessInputWrapper({ guesses, setGuesses }) {
-  const [guess, setGuess] = useState("");
   const [input, setInput] = useState("");
 
   function handleSubmit(event) {
@@ -10,7 +10,7 @@ function GuessInputWrapper({ guesses, setGuesses }) {
     let newGuess = input;
     setInput("");
 
-    if (guesses.length < 5) {
+    if (guesses.length < NUM_OF_GUESSES_ALLOWED) {
       const newGuessess = [...guesses, newGuess];
       setGuesses(newGuessess);
     }
