@@ -1,22 +1,35 @@
 import React from "react";
 
-import { checkGuess } from "../../game-helpers";
-import { NUM_OF_GUESSES_ALLOWED } from "../../constants";
 import { range } from "../../utils";
 import Guess from "../Guess/Guess";
 
-function GuessResults({ guesses, answer }) {
-  console.log(guesses);
-  console.log(range(NUM_OF_GUESSES_ALLOWED));
+import { checkGuess } from "../../game-helpers";
+
+function GuessResults({
+  answer,
+  guesses,
+  num_of_guesses_allowed,
+}) {
   return (
     <>
       <div className="guess-results">
-        {range(NUM_OF_GUESSES_ALLOWED).map((num, index) => {
-          console.log(index, guesses[index]);
-          let guess = guesses[index] ? checkGuess(guesses[index],answer) : Array(5).fill("");
-          console.log(guess);
+        {range(num_of_guesses_allowed).map((num, index) => {
+          let guess = guesses[index]
+            ? guesses[index].split("")
+            : Array(5).fill("");
+
+          let result = guesses[index] ? checkGuess(guesses[index], answer) : null;
+          if (result && result.every((item) => item.status === "correct")) {
+            alert("won");
+          }
+
           return (
-            <Guess value={guess} ndex={index} key={index} i></Guess>
+            <Guess
+              value={guess}
+              index={index}
+              result={result}
+              key={index}
+            ></Guess>
           );
         })}
       </div>
