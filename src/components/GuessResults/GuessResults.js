@@ -8,8 +8,9 @@ import { checkGuess } from "../../game-helpers";
 function GuessResults({
   answer,
   guesses,
-  num_of_guesses_allowed,
+  num_of_guesses_allowed
 }) {
+
   return (
     <>
       <div className="guess-results">
@@ -19,9 +20,6 @@ function GuessResults({
             : Array(5).fill("");
 
           let result = guesses[index] ? checkGuess(guesses[index], answer) : null;
-          if (result && result.every((item) => item.status === "correct")) {
-            alert("won");
-          }
 
           return (
             <Guess

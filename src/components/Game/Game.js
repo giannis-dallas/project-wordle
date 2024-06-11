@@ -15,9 +15,16 @@ console.info({ answer });
 function Game() {
   const [guesses, setGuesses] = useState([]);
 
-
   // status: ongoing, won. lost
-  const [gameStatus, setGameStatus] = useState(["ongoing"]);
+  const [gameStatus, setGameStatus] = useState("ongoing");
+
+  const handleGameResult = (result) => {
+    if (result === "won") {
+      setGameStatus("won");
+    } else if (result === "lost") {
+      setGameStatus("lost");
+    }
+  };
 
   return (
     <>
@@ -27,11 +34,12 @@ function Game() {
         num_of_guesses_allowed={NUM_OF_GUESSES_ALLOWED}
       />
       <GuessInputWrapper
+        answer={answer}
         guesses={guesses}
         setGuesses={setGuesses}
         gameStatus={gameStatus}
-        setGameStatus={setGameStatus}
         num_of_guesses_allowed={NUM_OF_GUESSES_ALLOWED}
+        handleGameResult={handleGameResult}
       />
     </>
   );
